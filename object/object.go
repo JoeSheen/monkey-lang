@@ -28,6 +28,7 @@ const (
 	BUILTIN_OBJ = "BUILTIN"
 	ARRAY_OBJ = "ARRAY"
 	HASH_OBJ = "HASH"
+	QUOTE_OBJ = "QUOTE"
 )
 
 type HashKey struct {
@@ -134,7 +135,7 @@ func (f *Function) Inspect() string {
 	out.WriteString("fn")
 	out.WriteString("(")
 	out.WriteString(strings.Join(params, ","))
-	out.WriteString("{\n")
+	out.WriteString(") {\n")
 	out.WriteString(f.Body.String())
 	out.WriteString("\n}")
 	
@@ -220,4 +221,16 @@ func (h *Hash) Inspect() string {
 	out.WriteString("}")
 
 	return out.String()
+}
+
+type Quote struct {
+	Node ast.Node
+}
+
+func (q *Quote) Type() ObjectType {
+	return QUOTE_OBJ
+}
+
+func (q *Quote) Inspect() string {
+	return "QUOTE(" + q.Node.String() + ")"
 }
