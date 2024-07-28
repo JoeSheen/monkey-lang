@@ -17,7 +17,6 @@ func TestDefineMacros(t *testing.T) {
 
 	env := object.NewEnvironment()
 	program := testParseProgram(input)
-
 	DefineMacros(program, env)
 
 	if len(program.Statements) != 2 {
@@ -43,7 +42,6 @@ func TestDefineMacros(t *testing.T) {
 	if !ok {
 		t.Fatalf("object is not Macro. got=%T (%+v)", obj, obj)
 	}
-
 	if len(macro.Parameters) != 2 {
 		t.Fatalf("wrong number of macro parameters. got=%d", len(macro.Parameters))
 	}
@@ -51,7 +49,6 @@ func TestDefineMacros(t *testing.T) {
 	if macro.Parameters[0].String() != "x" {
 		t.Fatalf("parameter is not 'x'. got=%q", macro.Parameters[0])
 	}
-	
 	if macro.Parameters[1].String() != "y" {
 		t.Fatalf("parameter is not 'y'. got=%q", macro.Parameters[1])
 	}
